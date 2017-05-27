@@ -48,32 +48,32 @@ Paws.App = (function() {
     self.navbar = new Paws.Navbar();
     self.initCommands();
     self.log('Initialized');
-  }
+  };
 
   self.initCommands = function() {
     _.each(self.commandsCallbacks, function(value, key) {
       var command = key;
       command = command.split('').join(' ');
       var callback;
-      if (value['href']) {
+      if (value.href) {
         callback = function() {
-          self.log('Redirecting to ' + value['href']);
-          window.location.href = value['href'];
+          self.log('Redirecting to ' + value.href);
+          window.location.href = value.href;
         };
-      } else if (value['open']) {
+      } else if (value.open) {
         callback = function() {
-          self.log('Opening ' + value['open']);
-          window.open(value['open']);
+          self.log('Opening ' + value.open);
+          window.open(value.open);
         };
-      } else if (value['focus']) {
+      } else if (value.focus) {
         callback = function() {
-          self.log('Selecting ' + value['focus']);
-          jQuery(value['focus']).focus();
+          self.log('Selecting ' + value.focus);
+          jQuery(value.focus).focus();
         };
-      } else if (value['func']) {
+      } else if (value.func) {
         callback = function() {
           self.log('Calling func');
-          var func = value['func'];
+          var func = value.func;
           self[func[0]][func[1]]();
         };
       } else {
@@ -100,7 +100,7 @@ Paws.Navbar = (function() {
 
   self.select = function() {
     var selectedAnchor = self.getSelectedAnchor();
-    if (selectedAnchor.length == 0) {
+    if (selectedAnchor.length === 0) {
       return;
     }
     // The [0] is necessary for the click to work on RDS
@@ -109,7 +109,7 @@ Paws.Navbar = (function() {
 
   self.unfocus = function() {
     var selectedAnchor = self.getSelectedAnchor();
-    if (selectedAnchor.length == 0) {
+    if (selectedAnchor.length === 0) {
       return;
     }
     selectedAnchor.blur();
@@ -120,7 +120,7 @@ Paws.Navbar = (function() {
   self.next = function() {
     self.anchors = jQuery('.gwt-Anchor');
     var selectedAnchor = self.getSelectedAnchor();
-    if (selectedAnchor.length == 0) {
+    if (selectedAnchor.length === 0) {
       self.selectAnchor(self.anchors.first());
     } else {
       var index = self.anchors.index(selectedAnchor);
@@ -132,7 +132,7 @@ Paws.Navbar = (function() {
   self.prev = function() {
     self.anchors = jQuery('.gwt-Anchor');
     var selectedAnchor = self.getSelectedAnchor();
-    if (selectedAnchor.length == 0) {
+    if (selectedAnchor.length === 0) {
       self.selectAnchor(self.anchors.last());
     } else {
       var index = self.anchors.index(selectedAnchor);
